@@ -15,5 +15,6 @@ public interface ICacheService {
     public void updateTodoList(TodoList todoList);
     public void deleteTodoList(TodoList todoList);
 
-    public TodoList queryTodoList(Integer seqNo);
+    public TodoList queryTodo(Integer seqNo);
+    public List<TodoList> queryTodoList();
 }

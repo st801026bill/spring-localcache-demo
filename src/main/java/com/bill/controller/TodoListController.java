@@ -8,6 +8,7 @@ import com.bill.dto.TodoListUpdateReqDto;
 import com.bill.service.ITodoListService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,5 +47,11 @@ public class TodoListController {
     @GetMapping("/todo/query/{seqNo}")
     public TodoListQueryResDto queryTodo(@PathVariable Integer seqNo) {
         return service.queryTodo(seqNo);
+    }
+
+    @Operation(summary = "代辦清單查詢", description = "代辦清單查詢")
+    @GetMapping("/todo/query")
+    public List<TodoListQueryResDto> queryTodoList() {
+        return service.queryTodoList();
     }
 }

@@ -2,6 +2,7 @@ package com.bill.service;
 
 import com.bill.dao.TodoListDao;
 import com.bill.entity.TodoList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -44,7 +45,12 @@ public class H2Service implements ICacheService {
     }
 
     @Override
-    public TodoList queryTodoList(Integer seqNo) {
+    public TodoList queryTodo(Integer seqNo) {
         return MapUtils.getObject(H2_MAP, seqNo);
+    }
+
+    @Override
+    public List<TodoList> queryTodoList() {
+        return new ArrayList<>(H2_MAP.values());
     }
 }

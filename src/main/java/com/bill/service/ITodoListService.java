@@ -10,5 +10,5 @@ public interface ITodoListService {
     public void deleteTodoList(TodoListDeleteReqDto reqDto);
 
     public TodoListQueryResDto queryTodo(Integer seqNo);
-    public List<TodoListQueryResDto> queryTodoList(RequestBlankReqDto reqDto);
+    public List<TodoListQueryResDto> queryTodoList();
 }
