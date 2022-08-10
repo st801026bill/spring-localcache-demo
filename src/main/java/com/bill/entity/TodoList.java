@@ -1,6 +1,7 @@
 package com.bill.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,23 +12,40 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "todo_list")
 public class TodoList {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "seq_no", nullable = false)
-	private Integer seqNo;
-	
-	@Column(name = "todo", nullable = false)
-	private String todo;
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		@Column(name = "seq_no", nullable = false)
+		private Integer seqNo;
 
-	@Column(name = "is_done", nullable = false)
-	private Boolean isDone;
+		@Column(name = "todo", nullable = false)
+		private String todo;
 
-	@Column(name = "create_date_time", nullable = false)
-	private LocalDateTime createDateTime;
-	
-	@Column(name = "update_date_time", nullable = false)
-	private LocalDateTime updateDateTime;
+		@Column(name = "is_done", nullable = false)
+		private Boolean isDone;
+
+		@Column(name = "create_date_time", nullable = false)
+		private LocalDateTime createDateTime;
+
+		@Column(name = "update_date_time", nullable = false)
+		private LocalDateTime updateDateTime;
+
+		public TodoList(Integer seqNo, String todo) {
+				this(todo);
+				this.seqNo = seqNo;
+		}
+
+		public TodoList(String todo) {
+				this.todo = todo;
+				this.isDone = false;
+				this.createDateTime = LocalDateTime.now();
+				this.updateDateTime = LocalDateTime.now();
+		}
+
+		public TodoList(Integer seqNo) {
+				this.seqNo = seqNo;
+		}
 }
