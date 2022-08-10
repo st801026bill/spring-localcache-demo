@@ -6,6 +6,7 @@ import com.bill.dto.TodoListQueryReqDto;
 import com.bill.dto.TodoListQueryResDto;
 import com.bill.dto.TodoListUpdateReqDto;
 import com.bill.service.ITodoListService;
+import com.bill.service.subject.IH2Service;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -16,11 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "TodoListController", description = "代辦清單建立服務")
+@Tag(name = "TodoListController", description = "代辦事項處理服務")
 @RestController
 public class TodoListController {
     @Autowired
-    private ITodoListService service;
+    private IH2Service service;
 
     @Operation(summary = "代辦事項新增", description = "代辦事項新增")
     @PostMapping("/todo/create")
@@ -41,17 +42,5 @@ public class TodoListController {
     public String deleteTodo(@RequestBody TodoListDeleteReqDto reqDto) {
         service.deleteTodoList(reqDto);
         return "send message success";
-    }
-
-    @Operation(summary = "代辦事項查詢", description = "代辦事項查詢")
-    @GetMapping("/todo/query/{seqNo}")
-    public TodoListQueryResDto queryTodo(@PathVariable Integer seqNo) {
-        return service.queryTodo(seqNo);
-    }
-
-    @Operation(summary = "代辦清單查詢", description = "代辦清單查詢")
-    @GetMapping("/todo/query")
-    public List<TodoListQueryResDto> queryTodoList() {
-        return service.queryTodoList();
     }
 }

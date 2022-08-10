@@ -1,17 +1,21 @@
 package com.bill.config;
 
-import com.bill.service.H2Service;
+import com.bill.service.observe.ConcurrentMapService;
+import com.bill.service.subject.H2Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class H2Config {
+public class TodoListConfig {
+    @Autowired
+    private ConcurrentMapService concurrentMapService;
     @Autowired
     private H2Service h2Service;
 
     @Bean
     public void updateCache() {
-        h2Service.updateCache();
+        h2Service.register(concurrentMapService);
+        h2Service.updateAllCache();
     }
 }
