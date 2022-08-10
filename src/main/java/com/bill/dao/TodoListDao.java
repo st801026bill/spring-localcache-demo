@@ -15,8 +15,11 @@ public class TodoListDao {
 	@Autowired
 	private TodoListRepository repository;
 	
-	public List<TodoList> findAll() {
-			return repository.findAll();
+	public List<TodoList> fintAll(int page, int size) {
+		Page<TodoList> pageResult = repository.findAll(
+				PageRequest.of(page, size, Sort.by("updateDateTime").descending()));
+		
+		return pageResult.getContent();
 	}
 	
 	public List<TodoList> findBySeqNo(int seqNo) {

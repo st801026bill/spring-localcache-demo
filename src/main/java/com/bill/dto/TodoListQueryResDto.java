@@ -1,21 +1,15 @@
 package com.bill.dto;
 
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class TodoListQueryResDto {
-    private Integer seqNo;
+    public Integer seqNo;
 
-    private String todo;
+    public String todo;
 
-    private Boolean isDone;
+    public Boolean isDone;
 
-    private LocalDateTime createDateTime;
+    public LocalDateTime createDateTime;
 
-    private LocalDateTime updateDateTime;
+    public LocalDateTime updateDateTime;
 }
