@@ -1,5 +1,7 @@
 package com.bill.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +16,7 @@ import java.time.LocalDateTime;
 @Entity
 @Builder
 @Table(name = "todo_list")
-public class TodoList {
+public class TodoList implements Serializable {
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)

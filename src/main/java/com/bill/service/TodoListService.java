@@ -2,14 +2,9 @@ package com.bill.service;
 
 import com.bill.dto.TodoListCreateReqDto;
 import com.bill.dto.TodoListDeleteReqDto;
-import com.bill.dto.TodoListQueryResDto;
 import com.bill.dto.TodoListUpdateReqDto;
-import com.bill.entity.TodoList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import com.bill.service.subject.H2Service;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
