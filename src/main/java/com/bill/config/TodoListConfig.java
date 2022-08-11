@@ -1,6 +1,7 @@
 package com.bill.config;
 
 import com.bill.service.observe.ConcurrentMapService;
+import com.bill.service.observe.RedisService;
 import com.bill.service.subject.H2Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,13 +10,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class TodoListConfig {
     @Autowired
+    private H2Service h2Service;
+
+    @Autowired
     private ConcurrentMapService concurrentMapService;
     @Autowired
-    private H2Service h2Service;
+    private RedisService redisService;
 
     @Bean
     public void updateCache() {
         h2Service.register(concurrentMapService);
+        h2Service.register(redisService);
         h2Service.updateAllCache();
     }
 }

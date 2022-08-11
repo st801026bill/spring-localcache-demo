@@ -19,15 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class ConcurrentMapService implements IObserveService, ICacheService {
 
-    @Autowired
-    private H2Service h2Service;
-
     private static ConcurrentMap<Integer, TodoList> TODO_MAP = new ConcurrentHashMap<>();
-
-    @Override
-    public void updateCache(List<TodoList> todoList) {
-        TODO_MAP = todoList.stream().collect(Collectors.toConcurrentMap(TodoList::getSeqNo, Function.identity()));
-    }
 
     @Override
     public TodoListQueryResDto queryTodo(Integer seqNo) {
@@ -43,5 +35,10 @@ public class ConcurrentMapService implements IObserveService, ICacheService {
             BeanUtils.copyProperties(todo, resDto);
             return resDto;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateCache(List<TodoList> todoList) {
+        TODO_MAP = todoList.stream().collect(Collectors.toConcurrentMap(TodoList::getSeqNo, Function.identity()));
     }
 }
