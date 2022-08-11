@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class H2Service implements IH2Service, ISubjectService {
 
-    private static List<IObserveService> cacheList = new ArrayList<>();
+    private static final List<IObserveService> cacheList = new ArrayList<>();
 
     @Autowired
     private TodoListDao todoListDao;
@@ -46,7 +46,7 @@ public class H2Service implements IH2Service, ISubjectService {
     @Override
     public void updateAllCache() {
         List<TodoList> todoLists = todoListDao.findAll();
-        cacheList.stream().forEach(cache -> {
+        cacheList.forEach(cache -> {
             cache.updateCache(todoLists);
         });
     }

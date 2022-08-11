@@ -3,6 +3,7 @@ package com.bill.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +29,7 @@ public class JsonUtils {
     }
 
     public <T> T readValue(String json, TypeReference<T> clazz) {
+        if(StringUtils.isBlank(json)) return null;
         try {
             return mapper.readValue(json, clazz);
         } catch (JsonProcessingException e) {

@@ -5,6 +5,6 @@ import com.bill.dto.TodoListQueryResDto;
 import java.util.List;
 
 public interface ICacheService {
-    public TodoListQueryResDto queryTodo(Integer seqNo);
-    public List<TodoListQueryResDto> queryTodoList();
+    TodoListQueryResDto queryTodo(Integer seqNo);
+    List<TodoListQueryResDto> queryTodoList();
 }
