@@ -10,6 +10,8 @@ spring:
   h2:
     console:
       enabled: true
+  main:
+    allow-circular-references: true
 
 server:
   port: 9000

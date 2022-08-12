@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,15 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class EhCacheService implements IObserveService, ICacheService {
 
+    @Autowired
+    private EhCacheService service;
+
     private static ConcurrentMap<Integer, TodoList> TODO_MAP = new ConcurrentHashMap<>();
 
     @Override
     public TodoListQueryResDto queryTodo(Integer seqNo) {
         TodoListQueryResDto result = new TodoListQueryResDto();
-        TodoList todo = query(seqNo);
+        TodoList todo = service.query(seqNo);
         BeanUtils.copyProperties(todo, result);
         return result;
     }
@@ -40,7 +44,7 @@ public class EhCacheService implements IObserveService, ICacheService {
     @Override
     public void updateCache(List<TodoList> todoList) {
         TODO_MAP = todoList.stream().collect(Collectors.toConcurrentMap(TodoList::getSeqNo, Function.identity()));
-        todoList.forEach(todo -> queryTodo(todo.getSeqNo()));
+        todoList.forEach(todo -> service.query(todo.getSeqNo()));
     }
 
     @Cacheable(value="TodoListCache", key = "#seqNo")

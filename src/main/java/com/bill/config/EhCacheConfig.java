@@ -20,7 +20,6 @@ public class EhCacheConfig extends CachingConfigurerSupport {
 	 * 4.	磁碟儲存使用預設的暫存路徑
 	 * 5.	cacheNames定義為EmployeeNewsPicCache
 	 */
-	@Bean
 	public net.sf.ehcache.CacheManager todolistEhCacheManager() {
 
 		long maxHours = 24L;
