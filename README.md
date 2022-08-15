@@ -17,6 +17,9 @@ step 2 : run redis container
 
 **B. UML**  
 ---
+初始階段會將所有IOserveService, 透過ISubjectService中的register() 儲存至Array  
+當使用者針對H2 DB做資料異動時, H2Service會呼叫updateAllCache()  
+逐筆跑迴圈並呼叫IOserveService所有實作類的updateCache(), 同步更新所有localcache
 ![image](https://github.com/st801026bill/spring-localcache-demo/blob/master/image/uml.png)
 
 **C. Demo**  
