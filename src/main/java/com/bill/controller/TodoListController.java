@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TodoListController {
     @Autowired
-    private IH2Service service;
+    private ITodoListService service;
 
     @Operation(summary = "代辦事項新增", description = "代辦事項新增")
     @PostMapping("/todo/create")
