@@ -15,12 +15,36 @@ step 2 : run redis container
 > docker run --name redis-notification -p 6379:6379 -d redis
 ```
 
-**B. UML**  
+**B. UML & Config**  
 ---
-初始階段會將所有IOserveService, 透過ISubjectService中的register() 儲存至Array  
+1. 初始階段會將所有IOserveService, 透過ISubjectService中的register() 儲存至Array 
 當使用者針對H2 DB做資料異動時, H2Service會呼叫updateAllCache()  
 逐筆跑迴圈並呼叫IOserveService所有實作類的updateCache(), 同步更新所有localcache
 ![image](https://github.com/st801026bill/spring-localcache-demo/blob/master/image/uml.png)
+
+2. 透過實作ApplicationRunner，再data.sql執行完之後，註冊所有observe並初始化cache 
+```sql
+@Component
+public class ObserveInitialRunner implements ApplicationRunner {
+
+    @Autowired
+    private H2Service h2Service;
+    @Autowired
+    private ConcurrentMapService concurrentMapService;
+    @Autowired
+    private RedisService redisService;
+    @Autowired
+    private EhCacheService ehCacheService;
+
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
+        h2Service.register(concurrentMapService);
+        h2Service.register(redisService);
+        h2Service.register(ehCacheService);
+        h2Service.updateAllCache();
+    }
+}
+```
 
 **C. Demo**  
 ---
